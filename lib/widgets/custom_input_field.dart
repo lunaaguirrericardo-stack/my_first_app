@@ -9,6 +9,12 @@ class CustomInputField extends StatelessWidget {
    final String? helperText;
    final IconData? icon;
    final IconData? suffixIcon;
+   final TextInputType? keyboardType;
+   final bool obscureText;
+
+   final String formProperty;
+   final Map<String, String> formValues;
+
 
 //Añadimos las variables al ? para inicializarlas como parametros de la clase
   const CustomInputField({
@@ -17,7 +23,11 @@ class CustomInputField extends StatelessWidget {
      this.labelText,
      this.helperText,
      this.icon,
-     this.suffixIcon,
+     this.suffixIcon, 
+     this.keyboardType, 
+     this.obscureText = false, 
+     required this.formProperty, 
+     required this.formValues,
      
       });
 
@@ -27,8 +37,10 @@ class CustomInputField extends StatelessWidget {
       autofocus: false,
       initialValue: '',
       textCapitalization: TextCapitalization.words,
+      keyboardType: keyboardType,
+      obscureText: obscureText,
       onChanged: (value) {
-        print('value $value');
+        formValues[formProperty] = value;
       },
       //Validación que muestra error al usar menos de 3 caracteres
       validator: (value) {
